@@ -285,8 +285,12 @@ module Webrat
     #
     # Example:
     #   submit_form 'login'
-    def submit_form(id)
-      FormLocator.new(@session, dom, id).locate.submit
+    #
+    # Note that it is possible to override the for action of the submit with the
+    # action_override parameter.  This allows you to create a step that simulates
+    # a javascript that changes the action while submitting a form
+    def submit_form(id,action_override = nil)
+      FormLocator.new(@session, dom, id).locate.submit(action_override)
     end
     
     def dom # :nodoc:

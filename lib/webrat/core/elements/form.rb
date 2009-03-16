@@ -16,8 +16,9 @@ module Webrat
       @fields ||= Field.load_all(@session, @element)
     end
     
-    def submit
-      @session.request_page(form_action, form_method, params)
+    def submit(action_override = nil)
+      action = action_override ? action_override : form_action
+      @session.request_page(action, form_method, params)
     end
     
     def field_named(name, *field_types)
